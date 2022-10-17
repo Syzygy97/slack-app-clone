@@ -1,0 +1,66 @@
+.sign-in-container,
+.form-container,
+.sign-in-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sign-in-container,
+.sign-in-input {
+  border: 2px solid black;
+}
+.sign-in-container,
+.form-container {
+  align-items: center;
+  width: max-content;
+}
+.sign-in-container > h1,
+.sign-in-inputs-container > label,
+.sign-in-inputs {
+  color: white;
+}
+.sign-in-button,
+.sign-in-inputs-container > label {
+  margin-top: 1.5rem;
+}
+
+.sign-in-container {
+  height: 600px;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 49, 114, 0.829);
+}
+.sign-in-container > img {
+  height: 8rem;
+  padding-bottom: 2rem;
+}
+.form-container {
+  padding: 0.5rem 0.75rem;
+}
+.sign-in-inputs-container > label {
+  margin-bottom: 0.75rem;
+}
+.sign-in-inputs {
+  width: 50ch;
+  height: 2rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+}
+.sign-in-button {
+  width: 15ch;
+}
+.invalid,
+.valid {
+  color: red;
+}
+.invalid {
+  display: block;
+  /* visibility: visible; */
+  /* opacity: 1; */
+  /* transition: visibility 300ms ease-in; */
+}
+.valid {
+  display: none;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+}

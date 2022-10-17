@@ -1,0 +1,12 @@
+.channel-container {
+  padding: 0.5rem 0.75rem;
+}
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.channel-header > i {
+  font-size: 1.25rem;
+  cursor: pointer;
+}

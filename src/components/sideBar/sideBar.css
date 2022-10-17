@@ -1,0 +1,19 @@
+.side-bar-container {
+  width: 15vw;
+  height: 100%;
+  position: relative;
+}
+.server-name {
+  height: 7vh;
+  width: 100%;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logout-button {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  cursor: pointer;
+}

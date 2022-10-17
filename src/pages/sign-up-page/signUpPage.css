@@ -1,0 +1,71 @@
+.sign-up-container,
+.form-container,
+.sign-up-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sign-up-container,
+.sign-up-input {
+  border: 2px solid black;
+}
+.sign-up-container,
+.form-container {
+  align-items: center;
+  width: max-content;
+}
+.sign-up-container > h1,
+.sign-up-inputs-container > label,
+.sign-up-inputs {
+  color: white;
+}
+.sign-up-button,
+.sign-up-inputs-container > label {
+  margin-top: 1.5rem;
+}
+
+.sign-up-container {
+  height: 600px;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 49, 114, 0.829);
+}
+.sign-up-container > img {
+  height: 6rem;
+  padding: 0.5rem 0;
+}
+.form-container {
+  padding: 0.5rem 0.75rem;
+}
+.sign-up-inputs-container > label {
+  margin-bottom: 0.75rem;
+}
+.sign-up-inputs {
+  width: 50ch;
+  height: 2rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+}
+span {
+  width: 50ch;
+  color: red;
+  display: none;
+}
+.sign-up-button {
+  width: 15ch;
+}
+.invalid,
+.valid {
+  color: red;
+}
+.invalid {
+  display: block;
+  /* visibility: visible; */
+  /* opacity: 1; */
+  /* transition: visibility 300ms ease-in; */
+}
+.valid {
+  display: none;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+}

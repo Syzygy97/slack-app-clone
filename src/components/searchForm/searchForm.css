@@ -1,0 +1,12 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 7vh;
+  border-bottom: 2px solid black;
+}
+.search-input {
+  width: 30ch;
+  height: 2rem;
+}
