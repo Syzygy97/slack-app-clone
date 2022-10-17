@@ -54,25 +54,29 @@ const SignInPage = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      // console.log("response", res.headers.get("access-token"));
-      // console.log("response", res.headers.get("client"));
-      // console.log("response", res.headers.get("expiry"));
-      // console.log("response", res.headers.get("uid"));
-      res.headers.forEach((val, key) => {
-        console.log(key + "->" + val);
-        if (
-          key === "access-token" ||
-          key === "client" ||
-          key === "expiry" ||
-          key === "uid"
-        ) {
-          saveCredentials(key, val);
-        }
+    })
+      .then((res) => {
+        // console.log("response", res.headers.get("access-token"));
+        // console.log("response", res.headers.get("client"));
+        // console.log("response", res.headers.get("expiry"));
+        // console.log("response", res.headers.get("uid"));
+        res.headers.forEach((val, key) => {
+          console.log(key + "->" + val);
+          if (
+            key === "access-token" ||
+            key === "client" ||
+            key === "expiry" ||
+            key === "uid"
+          ) {
+            saveCredentials(key, val);
+          }
+        });
+        alert("Form Submitted");
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
       });
-      alert("Form Submitted");
-      return res.json();
-    });
   };
   const handleChange = (e) => {
     e.preventDefault();
@@ -98,7 +102,7 @@ const SignInPage = () => {
         })
       );
       fetchUsers();
-      // navigate("/main");
+      navigate("/main");
     } else {
       setIsError(true);
       setWithAccount(false);

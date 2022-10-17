@@ -4,21 +4,101 @@ import Inputs from "../inputs";
 import "./modals.css";
 
 const Modals = ({ modal, setModal }) => {
+  const [channelData, setChannelData] = useState({
+    name: "",
+    user_ids: [],
+  });
+  const dataInputs = [
+    {
+      id: 1,
+      name: "name",
+      type: "text",
+      placeholder: "new channel",
+      label: "Channel name",
+      errorMessage: "Invalid channel name",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "user_ids",
+      type: "number",
+      placeholder: "enter member id#",
+      label: "Member(s)",
+      errorMessage: "Member does not exist",
+    },
+  ];
   const closeModal = (e) => {
     e.preventDefault();
     setModal(!modal);
+  };
+  const handleAddNewChannel = (e) => {
+    e.preventDefault();
+    fetchUsers();
+    setModal(!modal);
+  };
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (e.target.name === "user_ids") {
+      setChannelData({ ...channelData, [e.target.name]: [e.target.value] });
+    } else {
+      setChannelData({ ...channelData, [e.target.name]: e.target.value });
+    }
+  };
+  const fetchUsers = () => {
+    fetch("http://206.189.91.54/api/v1/channels", {
+      method: "POST",
+      body: JSON.stringify(channelData),
+      headers: {
+        "Content-Type": "application/json",
+        "access-token": localStorage.getItem("access-token"),
+        client: localStorage.getItem("client"),
+        expiry: localStorage.getItem("expiry"),
+        uid: localStorage.getItem("uid"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result));
   };
   return (
     <>
       {modal && (
         <div className="add-channel-modal">
           <div className="modal-overlay" onClick={closeModal}></div>
-          <div className="modal-container">
-            <Buttons name="X" onClick={closeModal} />
+          <form onSubmit={handleAddNewChannel} className="modal-container">
+            <Buttons
+              className="close-modal-button"
+              type="button"
+              name="X"
+              onClick={closeModal}
+            />
             <h1>Create a new channel</h1>
-            <h2>Channel name</h2>
-            <Inputs className="add-channel-input" />
-          </div>
+            {dataInputs.map((input) => (
+              <div className="modal-inputs-container" key={input.id}>
+                <label>{input.label}</label>
+                <Inputs
+                  {...input}
+                  className="add-channel-input"
+                  value={channelData[input.name]}
+                  onChange={handleChange}
+                />
+              </div>
+            ))}
+            {/* <Inputs
+              className="add-channel-input"
+              placeholder="new channel"
+              value={channelName}
+              onChange={handleChange}
+            />
+            <h2>Members</h2>
+            <Inputs
+              className="add-channel-members-input"
+              placeholder="add member(s)"
+            /> */}
+            <Buttons
+              className="create-new-channel-button"
+              name="Create channel"
+            />
+          </form>
         </div>
       )}
     </>

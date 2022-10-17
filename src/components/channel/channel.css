@@ -1,12 +1,31 @@
 .channel-container {
-  padding: 0.5rem 0.75rem;
+  height: calc(100vh - 7vh);
 }
 .channel-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  border-bottom: 2px solid black;
+  padding: 0.5rem 0.75rem;
 }
 .channel-header > i {
+  height: 2vh;
   font-size: 1.25rem;
   cursor: pointer;
+  scale: 1;
+  transition: scale 250ms ease-out;
+}
+.channel-header > i:hover {
+  scale: 2;
+  transition: scale 250ms ease-in;
+}
+.channel-list-container {
+  height: calc(93vh - 7vh - 7vh);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 2px solid black;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.channel-list-container li {
+  list-style: none;
 }
