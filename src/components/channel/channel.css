@@ -28,4 +28,5 @@
 }
 .channel-list-container li {
   list-style: none;
+  cursor: pointer;
 }

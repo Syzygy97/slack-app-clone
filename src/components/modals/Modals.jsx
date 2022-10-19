@@ -31,9 +31,9 @@ const Modals = ({ modal, setModal }) => {
     e.preventDefault();
     setModal(!modal);
   };
-  const handleAddNewChannel = (e) => {
+  const handleAddNewChannel = async (e) => {
     e.preventDefault();
-    fetchUsers();
+    await fetchUsers();
     setModal(!modal);
   };
   const handleChange = (e) => {
@@ -44,8 +44,8 @@ const Modals = ({ modal, setModal }) => {
       setChannelData({ ...channelData, [e.target.name]: e.target.value });
     }
   };
-  const fetchUsers = () => {
-    fetch("http://206.189.91.54/api/v1/channels", {
+  const fetchUsers = async () => {
+    await fetch("http://206.189.91.54/api/v1/channels", {
       method: "POST",
       body: JSON.stringify(channelData),
       headers: {

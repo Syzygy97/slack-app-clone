@@ -1,6 +1,28 @@
 .users-container {
+  width: 100%;
+  height: calc(100vh - 7vh - 7vh);
+  border-bottom: 2px solid black;
+}
+.users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid black;
   padding: 0.5rem 0.75rem;
 }
-button {
-  cursor: pointer;
+.users-container li {
+  list-style: none;
+}
+.channel-users-list {
+  height: calc(93vh - 7vh - 7vh);
+  padding: 0.5rem 0.75rem;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.signed-in-user-email {
+  height: 7vh;
+  width: 100%;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
 }

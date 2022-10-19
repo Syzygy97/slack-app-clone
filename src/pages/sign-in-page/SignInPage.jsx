@@ -47,8 +47,8 @@ const SignInPage = () => {
     if (SERVER_DATA) setUsersList(SERVER_DATA);
   }, []);
 
-  const fetchUsers = () => {
-    fetch("http://206.189.91.54/api/v1/auth/sign_in", {
+  const fetchUsers = async () => {
+    await fetch("http://206.189.91.54/api/v1/auth/sign_in", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -71,7 +71,7 @@ const SignInPage = () => {
             saveCredentials(key, val);
           }
         });
-        alert("Form Submitted");
+        // alert("Form Submitted");
         return res.json();
       })
       .then((result) => {
@@ -87,7 +87,7 @@ const SignInPage = () => {
     setIsError(false);
     setWithAccount(true);
   };
-  const validateUser = () => {
+  const validateUser = async () => {
     const userCheck = usersList.find(
       (user) =>
         user.email === userData.email && user.password === userData.password
@@ -101,7 +101,7 @@ const SignInPage = () => {
           password: userCheck.password,
         })
       );
-      fetchUsers();
+      await fetchUsers();
       navigate("/main");
     } else {
       setIsError(true);
@@ -109,9 +109,9 @@ const SignInPage = () => {
       return;
     }
   };
-  const handleSignInSubmit = (e) => {
+  const handleSignInSubmit = async (e) => {
     e.preventDefault();
-    validateUser(usersList);
+    await validateUser(usersList);
   };
   return (
     <div className="sign-in-container">
