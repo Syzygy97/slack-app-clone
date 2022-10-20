@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./channel.css";
 
 const USER_CHANNELS_LIST_KEY = "currentUserChannelList";
@@ -13,6 +14,7 @@ const Channel = ({
   setActiveChannelMemberCount,
   activeChannelMemberCount,
 }) => {
+  const navigate = useNavigate();
   const [channelList, setChannelList] = useState([]);
   const [channelId, setChannelId] = useState("");
   const handleAddChannel = (e) => {
@@ -64,10 +66,14 @@ const Channel = ({
     localStorage.setItem(CURRENT_CHANNEL_ID_KEY, JSON.stringify(id));
     localStorage.setItem(CURRENT_CHANNEL_NAME_KEY, JSON.stringify(name));
   };
+  const navigateToChannelMessages = (e) => {
+    e.preventDefault();
+    navigate("/main");
+  };
   return (
     <div className="channel-container">
       <div className="channel-header">
-        <h3>CHANNELS</h3>
+        <h3 onClick={navigateToChannelMessages}>CHANNELS</h3>
         <i onClick={handleAddChannel}>+</i>
       </div>
       <div className="channel-list-container">

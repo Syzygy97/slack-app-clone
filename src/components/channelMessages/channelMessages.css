@@ -1,0 +1,16 @@
+.channel-messages-container {
+  height: calc(100vh - 20vh - 0.75rem);
+  width: 100%;
+}
+.channel-messages {
+  padding: 0.25rem 0.5rem;
+}
+.channel-name {
+  width: 100%;
+  height: 7vh;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+}

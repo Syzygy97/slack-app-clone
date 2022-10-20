@@ -39,7 +39,7 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/main" element={<MainPage />} />
+        <Route path="/main/*" element={<MainPage />} />
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />
         <Route path="/sideBar" element={<SideBar />} />

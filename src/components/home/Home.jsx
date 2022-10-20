@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import ChannelMessages from "../channelMessages";
 import Messages from "../messages/Messages";
 import Messaging from "../messaging";
 import "./home.css";
@@ -13,11 +15,10 @@ const Home = ({ activeChannelName, activeChannelMemberCount }) => {
   // console.log(channelName);
   return (
     <div className="home-container">
-      <div className="channel-name">
-        <h3>{channelName}</h3>
-        <h4>{memberCount} users</h4>
-      </div>
-      <Messages />
+      <Routes>
+        <Route index element={<ChannelMessages />} />
+        <Route path="/directMessage" element={<Messages />} />
+      </Routes>
       <Messaging />
     </div>
   );

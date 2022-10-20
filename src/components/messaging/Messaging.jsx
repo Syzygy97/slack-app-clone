@@ -1,11 +1,15 @@
 import React from "react";
 import "./messaging.css";
 import { BsTypeBold, BsTypeItalic, BsTypeStrikethrough } from "react-icons/bs";
-import { RiListOrdered, RiListUnordered } from "react-icons/ri";
+import {
+  RiListOrdered,
+  RiListUnordered,
+  RiSendPlaneFill,
+} from "react-icons/ri";
 
 const Messaging = () => {
-  const sendMessages = () => {
-    fetch("http://206.189.91.54/api/v1/messages", {
+  const sendMessages = async () => {
+    await fetch("http://206.189.91.54/api/v1/messages", {
       method: "POST",
       // body: JSON.stringify()
       headers: {
@@ -20,14 +24,18 @@ const Messaging = () => {
   return (
     <div className="messaging-container">
       <header>
-        <BsTypeBold />
-        <BsTypeItalic />
-        <BsTypeStrikethrough />
-        <RiListOrdered />
-        <RiListUnordered />
+        <BsTypeBold className="message-formatter" />
+        <BsTypeItalic className="message-formatter" />
+        <BsTypeStrikethrough className="message-formatter" />
+        <RiListOrdered className="message-formatter" />
+        <RiListUnordered className="message-formatter" />
       </header>
-      <main></main>
-      <footer></footer>
+      <form>
+        <textarea className="messaging-input" />
+      </form>
+      <footer>
+        <RiSendPlaneFill className="send-message-button" />
+      </footer>
     </div>
   );
 };

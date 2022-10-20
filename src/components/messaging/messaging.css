@@ -16,7 +16,10 @@
   height: 25%;
   justify-content: space-around;
 }
-.messaging-container > main {
+header > .message-formatter {
+  cursor: pointer;
+}
+.messaging-container > form {
   height: 50%;
   width: 100%;
 }
@@ -31,4 +34,25 @@
 }
 .messaging-container > footer {
   border-top: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.25rem;
+}
+.messaging-input {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}
+footer > .send-message-button {
+  cursor: pointer;
+  border: 2px solid white;
+  width: 3rem;
+  font-size: 1.75rem;
+  border-radius: 8px;
+  background-color: rgb(88, 129, 88);
+  padding: 0.1rem 0;
 }

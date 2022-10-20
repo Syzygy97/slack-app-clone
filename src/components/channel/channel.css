@@ -8,6 +8,9 @@
   border-bottom: 2px solid black;
   padding: 0.5rem 0.75rem;
 }
+.channel-header > h3 {
+  cursor: pointer;
+}
 .channel-header > i {
   height: 2vh;
   font-size: 1.25rem;
