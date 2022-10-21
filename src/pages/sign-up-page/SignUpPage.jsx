@@ -111,23 +111,24 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className="sign-up-container">
-      <img src={logo} alt="logo" />
-      <h1>Create an account</h1>
-      <form onSubmit={handleSignUpSubmit} className="form-container">
-        {dataInputs.map((input) => (
-          <div className="sign-up-inputs-container" key={input.id}>
-            <label>{input.label}</label>
-            <Inputs
-              {...input}
-              className="sign-up-inputs"
-              value={userData[input.name]}
-              onChange={handleChange}
-              onClick={handleEmailClick}
-            />
-          </div>
-        ))}
-        {/* <label>EMAIL</label>
+    <div className="sign-up-page">
+      <div className="sign-up-container">
+        <img src={logo} alt="logo" />
+        <h1>Create an account</h1>
+        <form onSubmit={handleSignUpSubmit} className="form-container">
+          {dataInputs.map((input) => (
+            <div className="sign-up-inputs-container" key={input.id}>
+              <label>{input.label}</label>
+              <Inputs
+                {...input}
+                className="sign-up-inputs"
+                value={userData[input.name]}
+                onChange={handleChange}
+                onClick={handleEmailClick}
+              />
+            </div>
+          ))}
+          {/* <label>EMAIL</label>
           <Inputs
             className="sign-up-inputs"
             type="email"
@@ -152,9 +153,12 @@ const SignUpPage = () => {
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
           /> */}
-        <Buttons name="Confirm" className="sign-up-button" />
-      </form>
-      <h2 className={isError ? "invalid" : "valid"}>USERNAME ALREADY TAKEN</h2>
+          <Buttons name="Confirm" className="sign-up-button" />
+        </form>
+        <h2 className={isError ? "invalid" : "valid"}>
+          USERNAME ALREADY TAKEN
+        </h2>
+      </div>
     </div>
   );
 };

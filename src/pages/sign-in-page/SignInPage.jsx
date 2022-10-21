@@ -114,25 +114,29 @@ const SignInPage = () => {
     await validateUser(usersList);
   };
   return (
-    <div className="sign-in-container">
-      <img src={logo} alt="logo" />
-      <h1>Sign in to Slacord</h1>
-      <form onSubmit={handleSignInSubmit} className="form-container">
-        {dataInputs.map((input) => (
-          <div className="sign-in-inputs-container" key={input.id}>
-            <label>{input.label}</label>
-            <Inputs
-              {...input}
-              className="sign-in-inputs"
-              value={userData[input.name]}
-              onChange={handleChange}
-              onClick={handleInputClick}
-            />
-          </div>
-        ))}
-        <Buttons name="Confirm" className="sign-in-button" />
-      </form>
-      <h2 className={isError ? "invalid" : "valid"}>ACCOUNT DOES NOT EXIST</h2>
+    <div className="sign-in-page">
+      <div className="sign-in-container">
+        <img src={logo} alt="logo" />
+        <h1>Sign in to Slacord</h1>
+        <form onSubmit={handleSignInSubmit} className="form-container">
+          {dataInputs.map((input) => (
+            <div className="sign-in-inputs-container" key={input.id}>
+              <label>{input.label}</label>
+              <Inputs
+                {...input}
+                className="sign-in-inputs"
+                value={userData[input.name]}
+                onChange={handleChange}
+                onClick={handleInputClick}
+              />
+            </div>
+          ))}
+          <Buttons name="Confirm" className="sign-in-button" />
+        </form>
+        <h2 className={isError ? "invalid" : "valid"}>
+          ACCOUNT DOES NOT EXIST
+        </h2>
+      </div>
     </div>
   );
 };

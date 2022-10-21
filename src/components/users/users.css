@@ -1,17 +1,32 @@
 .users-container {
   width: 100%;
   height: calc(100vh - 7vh - 7vh);
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid antiquewhite;
 }
 .users-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid antiquewhite;
   padding: 0.5rem 0.75rem;
+}
+.users-header > i {
+  height: 2vh;
+  cursor: pointer;
+  font-size: 1.25rem;
+  scale: 1;
+  transform-origin: bottom right;
+  transition: scale 250ms ease-out;
+}
+.users-header > i:hover {
+  cursor: pointer;
+  scale: 2;
+  transform-origin: bottom right;
+  transition: scale 250ms ease-in;
 }
 .users-container li {
   list-style: none;
+  cursor: pointer;
 }
 .channel-users-list {
   height: calc(93vh - 7vh - 7vh);

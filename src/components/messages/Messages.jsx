@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import "./messages.css";
 import Avatar from "../../assets/avatar4.png";
 
-const Messages = () => {
+const Messages = ({ allUsers, userId }) => {
+  const { receiver__id, receiver__email } = useParams();
+  const receiver = allUsers.find((user) => user.id === receiver__id);
   const [directMessage, setDirectMessage] = useState([]);
   const [receiverEmail, setReceiverEmail] = useState("");
   const [receiverId, setReceiverId] = useState("");
   const [data, setData] = useState({
-    receiver_id: "2816",
+    receiver_id: parseInt(receiver__id),
     receiver_class: "User",
   });
+  // console.log("idid", userId);
   const retrieveDirectMessages = async () => {
     let dynamicUrl = new URL("http://206.189.91.54/api/v1/messages");
     for (let key in data) {
@@ -27,34 +31,34 @@ const Messages = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("result", result.data);
-        // if (result.data === undefined) {
-        //   setDirectMessage([]);
-        // } else {
-        return result.data; // }
+        return result.data;
       });
   };
+  useEffect(() => {
+    setData({ ...data, receiver_id: userId });
+  }, [data.receiver_id]);
   useEffect(() => {
     (async () => {
       const data = await retrieveDirectMessages();
       setDirectMessage(data);
-      console.log("dirMessage", directMessage);
-      getReceiverInfo(data);
+      // console.log("dirMessage", directMessage);
+      // getReceiverInfo(data);
     })();
   }, []);
-  const getReceiverInfo = (messages) => {
-    const receiverDetails = messages.find((data) => {
-      return data.receiver.uid !== localStorage.getItem("uid");
-    });
-    console.log("details", receiverDetails);
-    setReceiverEmail(receiverDetails.receiver.email);
-    setReceiverId(receiverDetails.receiver.id);
-  };
+  // const getReceiverInfo = (messages) => {
+  //   const receiverDetails = messages.find((data) => {
+  //     return data.receiver.uid !== localStorage.getItem("uid");
+  //   });
+  //   setReceiverEmail(receiverDetails.receiver.email);
+  //   setReceiverId(receiverDetails.receiver.id);
+  // };
+  // console.log("idid", userId);
+  console.log("dirMessage", directMessage);
   return (
     <div className="messages-container">
       <div className="receiver-name">
-        <h3>{receiverEmail}</h3>
-        <h4>{receiverId}</h4>
+        <h3>{receiver__email}</h3>
+        <h4>{receiver__id}</h4>
       </div>
       <div className="direct-messages">
         <ul>

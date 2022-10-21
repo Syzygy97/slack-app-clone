@@ -2,11 +2,12 @@
   width: 20vw;
   height: 100%;
   position: relative;
+  background-color: rgb(43, 0, 43);
 }
 .server-header {
   height: 7vh;
   width: 100%;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid antiquewhite;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -16,6 +17,14 @@
   bottom: 0.5rem;
   left: 0.5rem;
   cursor: pointer;
+  border-color: antiquewhite;
+  background-color: rgb(53, 0, 53);
+  color: antiquewhite;
+}
+.logout-button:hover {
+  border-color: black;
+  background-color: antiquewhite;
+  color: rgb(53, 0, 53);
 }
 .new-message-button {
   font-size: 1.5rem;

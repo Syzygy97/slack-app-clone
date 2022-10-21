@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid antiquewhite;
   padding: 0.5rem 0.75rem;
 }
 .channel-header > h3 {
@@ -16,16 +16,18 @@
   font-size: 1.25rem;
   cursor: pointer;
   scale: 1;
+  transform-origin: bottom right;
   transition: scale 250ms ease-out;
 }
 .channel-header > i:hover {
   scale: 2;
+  transform-origin: bottom right;
   transition: scale 250ms ease-in;
 }
 .channel-list-container {
   height: calc(93vh - 7vh - 7vh);
   padding: 0.5rem 0.75rem;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid antiquewhite;
   overflow: hidden;
   overflow-y: auto;
 }

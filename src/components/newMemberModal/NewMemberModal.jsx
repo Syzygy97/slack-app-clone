@@ -1,53 +1,50 @@
 import React, { useState } from "react";
+import "./newMemberModal.css";
 import Buttons from "../buttons";
 import Inputs from "../inputs";
-import "./modals.css";
 
-const Modals = ({ modal, setModal }) => {
-  const [channelData, setChannelData] = useState({
-    name: "",
-    user_ids: [],
+const NewMemberModal = ({ newMemberModal, setNewMemberModal }) => {
+  const [newMember, setNewMember] = useState({
+    id: "",
+    member_id: "",
   });
   const dataInputs = [
     {
       id: 1,
-      name: "name",
-      type: "text",
-      placeholder: "new channel",
-      label: "Channel name",
-      errorMessage: "Invalid channel name",
+      name: "id",
+      type: "number",
+      placeholder: "enter channel id",
+      label: "Channel ID",
+      errorMessage: "Invalid channel id",
       required: true,
     },
     {
       id: 2,
-      name: "user_ids",
+      name: "member_id",
       type: "number",
-      placeholder: "enter member id#",
-      label: "Member(s)",
+      placeholder: "enter member id",
+      label: "Member ID",
       errorMessage: "Member does not exist",
+      required: true,
     },
   ];
   const closeModal = (e) => {
     e.preventDefault();
-    setModal(!modal);
+    setNewMemberModal(!newMemberModal);
   };
   const handleAddNewChannel = async (e) => {
     e.preventDefault();
-    await fetchChannels();
-    setModal(!modal);
+    await fetchMembers();
+    setNewMemberModal(!newMemberModal);
   };
   const handleChange = (e) => {
     e.preventDefault();
-    if (e.target.name === "user_ids") {
-      setChannelData({ ...channelData, [e.target.name]: [e.target.value] });
-    } else {
-      setChannelData({ ...channelData, [e.target.name]: e.target.value });
-    }
+    setNewMember({ ...newMember, [e.target.name]: e.target.value });
   };
-  const fetchChannels = async () => {
-    await fetch("http://206.189.91.54/api/v1/channels", {
+  const fetchMembers = async () => {
+    await fetch("http://206.189.91.54/api/v1/channel/add_member", {
       method: "POST",
-      body: JSON.stringify(channelData),
+      body: JSON.stringify(newMember),
       headers: {
         "Content-Type": "application/json",
         "access-token": localStorage.getItem("access-token"),
@@ -61,32 +58,32 @@ const Modals = ({ modal, setModal }) => {
   };
   return (
     <>
-      {modal && (
-        <div className="add-channel-modal">
+      {newMemberModal && (
+        <div className="add-member-modal">
           <div className="modal-overlay" onClick={closeModal}></div>
-          <form onSubmit={handleAddNewChannel} className="modal-container">
+          <form
+            onSubmit={handleAddNewChannel}
+            className="new-member-modal-container"
+          >
             <Buttons
               className="close-modal-button"
               type="button"
               name="X"
               onClick={closeModal}
             />
-            <h1>Create a new channel</h1>
+            <h1>Add new member</h1>
             {dataInputs.map((input) => (
-              <div className="modal-inputs-container" key={input.id}>
+              <div className="new-member-modal-inputs-container" key={input.id}>
                 <label>{input.label}</label>
                 <Inputs
                   {...input}
-                  className="add-channel-input"
-                  value={channelData[input.name]}
+                  className="add-member-input"
+                  value={newMember[input.name]}
                   onChange={handleChange}
                 />
               </div>
             ))}
-            <Buttons
-              className="create-new-channel-button"
-              name="Create channel"
-            />
+            <Buttons className="add-new-member-button" name="Add member" />
           </form>
         </div>
       )}
@@ -94,4 +91,4 @@ const Modals = ({ modal, setModal }) => {
   );
 };
 
-export default Modals;
+export default NewMemberModal;

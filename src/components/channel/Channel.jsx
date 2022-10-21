@@ -58,6 +58,7 @@ const Channel = ({
     e.preventDefault();
     setActiveChannelId(id.toString());
     setActiveChannelName(name);
+    navigate("/main");
     // setActiveChannelMemberCount(activeChannelMemberCount);
     // localStorage.setItem(
     //   "memberCount",

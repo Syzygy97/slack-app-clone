@@ -31,12 +31,12 @@ function App() {
       {/* <div className="add-channel-modal">
         <Modals />
       </div> */}
-      <div className="quick-navigation">
+      {/* <div className="quick-navigation">
         <h5 onClick={toMainPage}>Main Page</h5>
         <h5 onClick={toSignUpPage}>Sign Up</h5>
         <h5 onClick={toSignInPage}>Sign In</h5>
         <h5 onClick={toLandingPage}>Landing Page</h5>
-      </div>
+      </div> */}
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/main/*" element={<MainPage />} />

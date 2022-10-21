@@ -4,38 +4,20 @@ import "./users.css";
 
 const MEMBER_COUNT_KEY = "memberCount";
 
-const Users = ({ allUsers, activeChannelId, setActiveChannelMemberCount }) => {
+const Users = ({
+  allUsers,
+  activeChannelId,
+  setActiveChannelMemberCount,
+  setSelectedReceiverId,
+  newMemberModal,
+  setNewMemberModal,
+}) => {
   const signedInData = JSON.parse(localStorage.getItem("signedInData"));
   const { email } = signedInData;
   // const [channelDetails, setChannelDetails] = useState([]);
   const [channelMembers, setChannelMembers] = useState([]);
   let dynamicUrl = "http://206.189.91.54/api/v1/channels/" + activeChannelId;
-  // const fetchChannels = async () => {
-  //   await fetch("http://206.189.91.54/api/v1/channels", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "access-token": localStorage.getItem("access-token"),
-  //       client: localStorage.getItem("client"),
-  //       expiry: localStorage.getItem("expiry"),
-  //       uid: localStorage.getItem("uid"),
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       const dataArray = result.data;
-  //       if (dataArray === undefined) {
-  //         setChannelDetails([]);
-  //       } else {
-  //         setChannelDetails(dataArray);
-  //       }
-  //     });
-  // };
-  // useEffect(() => {
-  //   (async () => {
-  //     await fetchChannels();
-  //   })();
-  // }, []);
+
   useEffect(() => {
     (async () => {
       await fetchChannelMemberIds();
@@ -60,6 +42,10 @@ const Users = ({ allUsers, activeChannelId, setActiveChannelMemberCount }) => {
           setChannelMembers([]);
         } else {
           setChannelMembers(channel_members);
+          // localStorage.setItem(
+          //   "channelMembers",
+          //   JSON.stringify(channelMembers)
+          // );
         }
         // setActiveChannelMemberCount(channelMembers.length);
       });
@@ -73,7 +59,17 @@ const Users = ({ allUsers, activeChannelId, setActiveChannelMemberCount }) => {
       JSON.stringify(channelMembers.length)
     );
   }, [channelMembers.length]);
-
+  useEffect(() => {
+    localStorage.setItem("channelMembers", JSON.stringify(channelMembers));
+  }, [channelMembers]);
+  const handleSelectUser = (e, memberId) => {
+    e.preventDefault();
+    setSelectedReceiverId(memberId);
+  };
+  const handleAddMember = (e) => {
+    e.preventDefault();
+    setNewMemberModal(!newMemberModal);
+  };
   // const userIds = channelMembers.map((data) => data.user_id);
   // const filteredData = allUsers.filter((user) => {
   //   // option 1
@@ -91,21 +87,24 @@ const Users = ({ allUsers, activeChannelId, setActiveChannelMemberCount }) => {
       <div className="users-container">
         <div className="users-header">
           <h3>MEMBERS</h3>
+          <i onClick={handleAddMember}>+</i>
         </div>
         <div className="channel-users-list">
           <ul>
             {channelMembers.map((member) => {
-              return <li key={member.id}>{member.user_id}</li>;
+              return (
+                <li
+                  key={member.id}
+                  onClick={(e) => {
+                    handleSelectUser(e, member.user_id);
+                  }}
+                >
+                  {member.user_id}
+                </li>
+              );
             })}
           </ul>
         </div>
-        {/* <Buttons name="GET USERS" />
-      <h3>ROLE 1</h3>
-      <h4>User 1</h4>
-      <h4>User 2</h4>
-      <h3>ROLE 2</h3>
-      <h4>User 3</h4>
-      <h4>User 4</h4> */}
       </div>
       <div className="signed-in-user-email">
         <h2>{email}</h2>

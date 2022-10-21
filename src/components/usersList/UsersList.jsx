@@ -7,6 +7,9 @@ const UsersList = ({
   allUsers,
   activeChannelId,
   setActiveChannelMemberCount,
+  setSelectedReceiverId,
+  newMemberModal,
+  setNewMemberModal,
 }) => {
   return (
     <div className="users-list-container">
@@ -15,6 +18,9 @@ const UsersList = ({
         allUsers={allUsers}
         activeChannelId={activeChannelId}
         setActiveChannelMemberCount={setActiveChannelMemberCount}
+        setSelectedReceiverId={setSelectedReceiverId}
+        newMemberModal={newMemberModal}
+        setNewMemberModal={setNewMemberModal}
       />
     </div>
   );
