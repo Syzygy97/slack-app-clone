@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Buttons from "../buttons";
 import "./users.css";
 
 const MEMBER_COUNT_KEY = "memberCount";
@@ -7,14 +6,11 @@ const MEMBER_COUNT_KEY = "memberCount";
 const Users = ({
   allUsers,
   activeChannelId,
-  setActiveChannelMemberCount,
-  setSelectedReceiverId,
   newMemberModal,
   setNewMemberModal,
 }) => {
   const signedInData = JSON.parse(localStorage.getItem("signedInData"));
   const { email } = signedInData;
-  // const [channelDetails, setChannelDetails] = useState([]);
   const [channelMembers, setChannelMembers] = useState([]);
   let dynamicUrl = "http://206.189.91.54/api/v1/channels/" + activeChannelId;
 
@@ -42,18 +38,10 @@ const Users = ({
           setChannelMembers([]);
         } else {
           setChannelMembers(channel_members);
-          // localStorage.setItem(
-          //   "channelMembers",
-          //   JSON.stringify(channelMembers)
-          // );
         }
-        // setActiveChannelMemberCount(channelMembers.length);
       });
   };
-  // console.log("members", channelMembers);
-  // console.log("channel members", channelMembers);
   useEffect(() => {
-    setActiveChannelMemberCount(channelMembers.length);
     localStorage.setItem(
       MEMBER_COUNT_KEY,
       JSON.stringify(channelMembers.length)
@@ -62,9 +50,8 @@ const Users = ({
   useEffect(() => {
     localStorage.setItem("channelMembers", JSON.stringify(channelMembers));
   }, [channelMembers]);
-  const handleSelectUser = (e, memberId) => {
+  const handleSelectUser = (e) => {
     e.preventDefault();
-    setSelectedReceiverId(memberId);
   };
   const handleAddMember = (e) => {
     e.preventDefault();
@@ -96,7 +83,7 @@ const Users = ({
                 <li
                   key={member.id}
                   onClick={(e) => {
-                    handleSelectUser(e, member.user_id);
+                    handleSelectUser(e);
                   }}
                 >
                   {member.user_id}

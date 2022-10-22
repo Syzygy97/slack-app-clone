@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import ChannelMessages from "../channelMessages";
+import ChannelMessaging from "../channelMessaging";
 import Messages from "../messages/Messages";
 import Messaging from "../messaging";
 import NewMessage from "../newMessage";
+import Welcome from "../welcome/Welcome";
 import "./home.css";
 
-const Home = ({
-  activeChannelName,
-  activeChannelMemberCount,
-  selectedReceiverId,
-  allUsers,
-}) => {
-  const channelName = JSON.parse(localStorage.getItem("currentChannelName"));
-  const memberCount = JSON.parse(localStorage.getItem("memberCount"));
-  // useEffect(() => {
-  //   const channelName = JSON.parse(localStorage.getItem("currentChannelName"));
-  //   if (channelName) setChannelName(channelName);
-  // }, [channelName]);
-  // console.log(channelName);
+const Home = ({ allUsers, channel_id }) => {
   const [userId, setUserId] = useState("");
-  // console.log("id", userId);
   return (
     <div className="home-container">
       <Routes>
-        <Route index element={<ChannelMessages />} />
+        <Route index element={<Welcome />} />
+        <Route
+          path="/channelMessage/:channel__id/:channel__name"
+          element={<ChannelMessages />}
+        />
         <Route
           path="/directMessage"
           element={<NewMessage allUsers={allUsers} setUserId={setUserId} />}
@@ -34,7 +27,16 @@ const Home = ({
           element={<Messages allUsers={allUsers} userId={userId} />}
         />
       </Routes>
-      <Messaging selectedReceiverId={selectedReceiverId} userId={userId} />
+      <Routes>
+        <Route
+          path="/directMessage/*"
+          element={<Messaging userId={userId} />}
+        />
+        <Route
+          path="/channelMessage/*"
+          element={<ChannelMessaging channel_id={channel_id} />}
+        />
+      </Routes>
     </div>
   );
 };

@@ -12,6 +12,9 @@
   justify-content: space-around;
   align-items: center;
 }
+.server-header > h2 {
+  cursor: pointer;
+}
 .logout-button {
   position: absolute;
   bottom: 0.5rem;

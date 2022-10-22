@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./messaging.css";
+import "./channelMessaging.css";
 import { BsTypeBold, BsTypeItalic, BsTypeStrikethrough } from "react-icons/bs";
 import {
   RiListOrdered,
@@ -7,16 +7,16 @@ import {
   RiSendPlaneFill,
 } from "react-icons/ri";
 
-const Messaging = ({ userId }) => {
-  const [messageData, setMessageData] = useState({
+const ChannelMessaging = ({ channel_id }) => {
+  const [channelMessageData, setChannelMessageData] = useState({
     receiver_id: "",
-    receiver_class: "User",
+    receiver_class: "Channel",
     body: "",
   });
   const sendMessages = async () => {
     await fetch("http://206.189.91.54/api/v1/messages", {
       method: "POST",
-      body: JSON.stringify(messageData),
+      body: JSON.stringify(channelMessageData),
       headers: {
         "Content-Type": "application/json",
         "access-token": localStorage.getItem("access-token"),
@@ -30,18 +30,20 @@ const Messaging = ({ userId }) => {
   };
   const handleChange = (e) => {
     e.preventDefault();
-    setMessageData({ ...messageData, body: e.target.value });
-    localStorage.setItem("messageData", JSON.stringify(messageData));
+    setChannelMessageData({ ...channelMessageData, body: e.target.value });
+    localStorage.setItem(
+      "channelMessageData",
+      JSON.stringify(channelMessageData)
+    );
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     sendMessages();
-    setMessageData({ ...messageData, body: "" });
+    setChannelMessageData({ ...channelMessageData, body: "" });
   };
   useEffect(() => {
-    setMessageData({ ...messageData, receiver_id: userId });
-  }, [messageData.body]);
-  // console.log("msg data", messageData);
+    setChannelMessageData({ ...channelMessageData, receiver_id: channel_id });
+  }, [channelMessageData.body]);
   return (
     <div className="messaging-container">
       <header>
@@ -55,7 +57,7 @@ const Messaging = ({ userId }) => {
         <textarea
           className="messaging-input"
           onChange={handleChange}
-          value={messageData.body}
+          value={channelMessageData.body}
         />
       </form>
       <footer>
@@ -68,4 +70,4 @@ const Messaging = ({ userId }) => {
   );
 };
 
-export default Messaging;
+export default ChannelMessaging;

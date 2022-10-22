@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes, Link, useNavigate } from "react-router-dom";
-import Messages from "../messages/Messages";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./newMessage.css";
 
 const NewMessage = ({ allUsers, setUserId }) => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
   const [recipient, setRecipient] = useState("");
-  // const [userLists, setUserLists] = useState([]);
-  // const [searchResults, setSearchResults] = useState([]);
   const handleFocus = (e) => {
     e.preventDefault();
     setIsActive(false);
@@ -83,10 +80,7 @@ const NewMessage = ({ allUsers, setUserId }) => {
         </div>
       </form>
       <div className="new-message-body" onClick={handleClick}>
-        <Routes>
-          <Route index element={<div></div>} />
-          {/* <Route path="/directMessage/:receiver__id" element={<Messages />} /> */}
-        </Routes>
+        <div></div>
       </div>
     </div>
   );

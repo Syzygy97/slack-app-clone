@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./channel.css";
 
 const USER_CHANNELS_LIST_KEY = "currentUserChannelList";
 const CURRENT_CHANNEL_ID_KEY = "currentChannelId";
 const CURRENT_CHANNEL_NAME_KEY = "currentChannelName";
 
-const Channel = ({
-  modal,
-  setModal,
-  setActiveChannelId,
-  setActiveChannelName,
-  setActiveChannelMemberCount,
-  activeChannelMemberCount,
-}) => {
+const Channel = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
   const navigate = useNavigate();
   const [channelList, setChannelList] = useState([]);
-  const [channelId, setChannelId] = useState("");
   const handleAddChannel = (e) => {
     e.preventDefault();
     console.log("test");
@@ -52,44 +44,40 @@ const Channel = ({
     (async () => {
       await fetchChannels();
     })();
-    // fetchChannels();
   }, []);
   const handleSelectChannel = (e, id, name) => {
     e.preventDefault();
     setActiveChannelId(id.toString());
-    setActiveChannelName(name);
-    navigate("/main");
-    // setActiveChannelMemberCount(activeChannelMemberCount);
-    // localStorage.setItem(
-    //   "memberCount",
-    //   JSON.stringify(activeChannelMemberCount)
-    // );
+    navigate(`channelMessage/${id}/${name}`);
+    setChannel_id(id);
     localStorage.setItem(CURRENT_CHANNEL_ID_KEY, JSON.stringify(id));
     localStorage.setItem(CURRENT_CHANNEL_NAME_KEY, JSON.stringify(name));
-  };
-  const navigateToChannelMessages = (e) => {
-    e.preventDefault();
-    navigate("/main");
   };
   return (
     <div className="channel-container">
       <div className="channel-header">
-        <h3 onClick={navigateToChannelMessages}>CHANNELS</h3>
+        <h3>CHANNELS</h3>
         <i onClick={handleAddChannel}>+</i>
       </div>
       <div className="channel-list-container">
         <ul>
           {channelList.map((channel) => {
             return (
-              <li
+              <Link
+                to={`/channelMessage/${channel.id}/${channel.name}`}
+                style={{ textDecoration: "none" }}
                 key={channel.id}
-                onClick={(e) => {
-                  handleSelectChannel(e, channel.id, channel.name);
-                }}
               >
-                <h4>{channel.name}</h4>
-                <h6>{channel.id}</h6>
-              </li>
+                <li
+                  key={channel.id}
+                  onClick={(e) => {
+                    handleSelectChannel(e, channel.id, channel.name);
+                  }}
+                >
+                  <h4>{channel.name}</h4>
+                  <h6>{channel.id}</h6>
+                </li>
+              </Link>
             );
           })}
         </ul>

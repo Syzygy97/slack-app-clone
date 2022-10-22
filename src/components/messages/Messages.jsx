@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./messages.css";
 import Avatar from "../../assets/avatar4.png";
 
@@ -7,13 +7,10 @@ const Messages = ({ allUsers, userId }) => {
   const { receiver__id, receiver__email } = useParams();
   const receiver = allUsers.find((user) => user.id === receiver__id);
   const [directMessage, setDirectMessage] = useState([]);
-  const [receiverEmail, setReceiverEmail] = useState("");
-  const [receiverId, setReceiverId] = useState("");
   const [data, setData] = useState({
     receiver_id: parseInt(receiver__id),
     receiver_class: "User",
   });
-  // console.log("idid", userId);
   const retrieveDirectMessages = async () => {
     let dynamicUrl = new URL("http://206.189.91.54/api/v1/messages");
     for (let key in data) {
@@ -41,19 +38,8 @@ const Messages = ({ allUsers, userId }) => {
     (async () => {
       const data = await retrieveDirectMessages();
       setDirectMessage(data);
-      // console.log("dirMessage", directMessage);
-      // getReceiverInfo(data);
     })();
   }, []);
-  // const getReceiverInfo = (messages) => {
-  //   const receiverDetails = messages.find((data) => {
-  //     return data.receiver.uid !== localStorage.getItem("uid");
-  //   });
-  //   setReceiverEmail(receiverDetails.receiver.email);
-  //   setReceiverId(receiverDetails.receiver.id);
-  // };
-  // console.log("idid", userId);
-  console.log("dirMessage", directMessage);
   return (
     <div className="messages-container">
       <div className="receiver-name">
@@ -64,9 +50,7 @@ const Messages = ({ allUsers, userId }) => {
         <ul>
           {directMessage.map((data) => {
             const message = data.body;
-            const receiver = data.receiver;
             const sender = data.sender;
-            const receiverEmail = receiver.email;
             const senderEmail = sender.email;
             const isoString = data.created_at;
             const day = new Date(isoString);

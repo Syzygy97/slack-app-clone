@@ -6,8 +6,6 @@ import "./usersList.css";
 const UsersList = ({
   allUsers,
   activeChannelId,
-  setActiveChannelMemberCount,
-  setSelectedReceiverId,
   newMemberModal,
   setNewMemberModal,
 }) => {
@@ -17,8 +15,6 @@ const UsersList = ({
       <Users
         allUsers={allUsers}
         activeChannelId={activeChannelId}
-        setActiveChannelMemberCount={setActiveChannelMemberCount}
-        setSelectedReceiverId={setSelectedReceiverId}
         newMemberModal={newMemberModal}
         setNewMemberModal={setNewMemberModal}
       />

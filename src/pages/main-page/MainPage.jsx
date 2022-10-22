@@ -14,13 +14,9 @@ const MainPage = () => {
   const memberCount = JSON.parse(localStorage.getItem("memberCount"));
   const [modal, setModal] = useState(false);
   const [newMemberModal, setNewMemberModal] = useState(false);
-  const [selectedReceiverId, setSelectedReceiverId] = useState("");
+  const [channel_id, setChannel_id] = useState("");
   const [allUsers, setAllUsers] = useState([]);
-  const [activeChannelName, setActiveChannelName] =
-    useState(currentChannelName);
   const [activeChannelId, setActiveChannelId] = useState(currentChannelId);
-  const [activeChannelMemberCount, setActiveChannelMemberCount] =
-    useState(memberCount);
   const fetchAllUsers = async () => {
     await fetch("http://206.189.91.54/api/v1/users", {
       method: "GET",
@@ -49,21 +45,12 @@ const MainPage = () => {
         modal={modal}
         setModal={setModal}
         setActiveChannelId={setActiveChannelId}
-        setActiveChannelName={setActiveChannelName}
-        setActiveChannelMemberCount={setActiveChannelMemberCount}
-        activeChannelMemberCount={activeChannelMemberCount}
+        setChannel_id={setChannel_id}
       />
-      <Home
-        activeChannelName={activeChannelName}
-        activeChannelMemberCount={activeChannelMemberCount}
-        selectedReceiverId={selectedReceiverId}
-        allUsers={allUsers}
-      />
+      <Home allUsers={allUsers} channel_id={channel_id} />
       <UsersList
         allUsers={allUsers}
         activeChannelId={activeChannelId}
-        setActiveChannelMemberCount={setActiveChannelMemberCount}
-        setSelectedReceiverId={setSelectedReceiverId}
         newMemberModal={newMemberModal}
         setNewMemberModal={setNewMemberModal}
       />

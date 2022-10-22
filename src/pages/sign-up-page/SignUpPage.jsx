@@ -4,6 +4,7 @@ import logo from "../../assets/yourLogoHere.png";
 import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/navBar";
 
 const USER_LIST_STORAGE_KEY = "usersList";
 
@@ -112,6 +113,7 @@ const SignUpPage = () => {
   };
   return (
     <div className="sign-up-page">
+      <NavBar />
       <div className="sign-up-container">
         <img src={logo} alt="logo" />
         <h1>Create an account</h1>

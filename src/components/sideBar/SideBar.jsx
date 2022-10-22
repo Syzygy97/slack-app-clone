@@ -5,14 +5,7 @@ import Channel from "../channel";
 import "./sideBar.css";
 import { BsPencilSquare } from "react-icons/bs";
 
-const SideBar = ({
-  modal,
-  setModal,
-  setActiveChannelId,
-  setActiveChannelName,
-  setActiveChannelMemberCount,
-  activeChannelMemberCount,
-}) => {
+const SideBar = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/login");
@@ -22,10 +15,14 @@ const SideBar = ({
     e.preventDefault();
     navigate("/main/directMessage");
   };
+  const navigateToWelcome = (e) => {
+    e.preventDefault();
+    navigate("/main");
+  };
   return (
     <div className="side-bar-container">
       <div className="server-header">
-        <h2>AVION SCHOOL</h2>
+        <h2 onClick={navigateToWelcome}>AVION SCHOOL</h2>
         <BsPencilSquare
           className="new-message-button"
           onClick={navigateToDirectMessage}
@@ -35,9 +32,7 @@ const SideBar = ({
         modal={modal}
         setModal={setModal}
         setActiveChannelId={setActiveChannelId}
-        setActiveChannelName={setActiveChannelName}
-        setActiveChannelMemberCount={setActiveChannelMemberCount}
-        activeChannelMemberCount={activeChannelMemberCount}
+        setChannel_id={setChannel_id}
       />
       <Buttons onClick={handleLogout} className="logout-button" name="Logout" />
     </div>

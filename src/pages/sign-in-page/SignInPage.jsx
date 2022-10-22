@@ -3,7 +3,7 @@ import "./signInPage.css";
 import logo from "../../assets/yourLogoHere.png";
 import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const SIGNED_IN_STORAGE_KEY = "signedInData";
 
@@ -133,6 +133,12 @@ const SignInPage = () => {
           ))}
           <Buttons name="Confirm" className="sign-in-button" />
         </form>
+        <h4>
+          Don't have an account yet?{" "}
+          <Link to="/register" style={{ color: "rgb(250,0,250)" }}>
+            Register
+          </Link>
+        </h4>
         <h2 className={isError ? "invalid" : "valid"}>
           ACCOUNT DOES NOT EXIST
         </h2>
