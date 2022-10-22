@@ -8,15 +8,13 @@ import NewMemberModal from "../../components/newMemberModal";
 
 const MainPage = () => {
   const currentChannelId = JSON.parse(localStorage.getItem("currentChannelId"));
-  const currentChannelName = JSON.parse(
-    localStorage.getItem("currentChannelName")
-  );
-  const memberCount = JSON.parse(localStorage.getItem("memberCount"));
   const [modal, setModal] = useState(false);
   const [newMemberModal, setNewMemberModal] = useState(false);
   const [channel_id, setChannel_id] = useState("");
   const [allUsers, setAllUsers] = useState([]);
   const [activeChannelId, setActiveChannelId] = useState(currentChannelId);
+  const [newChannel, setNewChannel] = useState([]);
+  const [addNewMember, setAddNewMember] = useState([]);
   const fetchAllUsers = async () => {
     await fetch("http://206.189.91.54/api/v1/users", {
       method: "GET",
@@ -46,6 +44,7 @@ const MainPage = () => {
         setModal={setModal}
         setActiveChannelId={setActiveChannelId}
         setChannel_id={setChannel_id}
+        newChannel={newChannel}
       />
       <Home allUsers={allUsers} channel_id={channel_id} />
       <UsersList
@@ -53,11 +52,13 @@ const MainPage = () => {
         activeChannelId={activeChannelId}
         newMemberModal={newMemberModal}
         setNewMemberModal={setNewMemberModal}
+        addNewMember={addNewMember}
       />
-      <Modals modal={modal} setModal={setModal} />
+      <Modals modal={modal} setModal={setModal} setNewChannel={setNewChannel} />
       <NewMemberModal
         newMemberModal={newMemberModal}
         setNewMemberModal={setNewMemberModal}
+        setAddNewMember={setAddNewMember}
       />
     </div>
   );

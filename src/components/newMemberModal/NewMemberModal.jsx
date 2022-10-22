@@ -3,7 +3,11 @@ import "./newMemberModal.css";
 import Buttons from "../buttons";
 import Inputs from "../inputs";
 
-const NewMemberModal = ({ newMemberModal, setNewMemberModal }) => {
+const NewMemberModal = ({
+  newMemberModal,
+  setNewMemberModal,
+  setAddNewMember,
+}) => {
   const [newMember, setNewMember] = useState({
     id: "",
     member_id: "",
@@ -32,16 +36,16 @@ const NewMemberModal = ({ newMemberModal, setNewMemberModal }) => {
     e.preventDefault();
     setNewMemberModal(!newMemberModal);
   };
-  const handleAddNewChannel = async (e) => {
+  const handleAddNewMember = async (e) => {
     e.preventDefault();
-    await fetchMembers();
+    await AddMember();
     setNewMemberModal(!newMemberModal);
   };
   const handleChange = (e) => {
     e.preventDefault();
     setNewMember({ ...newMember, [e.target.name]: e.target.value });
   };
-  const fetchMembers = async () => {
+  const AddMember = async () => {
     await fetch("http://206.189.91.54/api/v1/channel/add_member", {
       method: "POST",
       body: JSON.stringify(newMember),
@@ -54,7 +58,7 @@ const NewMemberModal = ({ newMemberModal, setNewMemberModal }) => {
       },
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => setAddNewMember(result.data));
   };
   return (
     <>
@@ -62,7 +66,7 @@ const NewMemberModal = ({ newMemberModal, setNewMemberModal }) => {
         <div className="add-member-modal">
           <div className="modal-overlay" onClick={closeModal}></div>
           <form
-            onSubmit={handleAddNewChannel}
+            onSubmit={handleAddNewMember}
             className="new-member-modal-container"
           >
             <Buttons

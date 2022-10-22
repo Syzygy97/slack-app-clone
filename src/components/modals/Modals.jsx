@@ -3,7 +3,7 @@ import Buttons from "../buttons";
 import Inputs from "../inputs";
 import "./modals.css";
 
-const Modals = ({ modal, setModal }) => {
+const Modals = ({ modal, setModal, setNewChannel }) => {
   const [channelData, setChannelData] = useState({
     name: "",
     user_ids: [],
@@ -57,7 +57,7 @@ const Modals = ({ modal, setModal }) => {
       },
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => setNewChannel(result.data));
   };
   return (
     <>

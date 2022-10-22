@@ -8,6 +8,7 @@ const Users = ({
   activeChannelId,
   newMemberModal,
   setNewMemberModal,
+  addNewMember,
 }) => {
   const signedInData = JSON.parse(localStorage.getItem("signedInData"));
   const { email } = signedInData;
@@ -18,7 +19,7 @@ const Users = ({
     (async () => {
       await fetchChannelMemberIds();
     })();
-  }, [dynamicUrl]);
+  }, [dynamicUrl, addNewMember]);
   const fetchChannelMemberIds = async () => {
     await fetch(dynamicUrl, {
       method: "GET",

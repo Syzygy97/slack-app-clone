@@ -5,7 +5,13 @@ import Channel from "../channel";
 import "./sideBar.css";
 import { BsPencilSquare } from "react-icons/bs";
 
-const SideBar = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
+const SideBar = ({
+  modal,
+  setModal,
+  setActiveChannelId,
+  setChannel_id,
+  newChannel,
+}) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/login");
@@ -33,6 +39,7 @@ const SideBar = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
         setModal={setModal}
         setActiveChannelId={setActiveChannelId}
         setChannel_id={setChannel_id}
+        newChannel={newChannel}
       />
       <Buttons onClick={handleLogout} className="logout-button" name="Logout" />
     </div>

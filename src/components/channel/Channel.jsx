@@ -6,7 +6,13 @@ const USER_CHANNELS_LIST_KEY = "currentUserChannelList";
 const CURRENT_CHANNEL_ID_KEY = "currentChannelId";
 const CURRENT_CHANNEL_NAME_KEY = "currentChannelName";
 
-const Channel = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
+const Channel = ({
+  modal,
+  setModal,
+  setActiveChannelId,
+  setChannel_id,
+  newChannel,
+}) => {
   const navigate = useNavigate();
   const [channelList, setChannelList] = useState([]);
   const handleAddChannel = (e) => {
@@ -44,7 +50,7 @@ const Channel = ({ modal, setModal, setActiveChannelId, setChannel_id }) => {
     (async () => {
       await fetchChannels();
     })();
-  }, []);
+  }, [newChannel]);
   const handleSelectChannel = (e, id, name) => {
     e.preventDefault();
     setActiveChannelId(id.toString());
