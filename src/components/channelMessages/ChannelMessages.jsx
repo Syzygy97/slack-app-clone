@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import "./channelMessages.css";
 import Avatar from "../../assets/avatar4.png";
 
-const ChannelMessages = () => {
+const ChannelMessages = ({ messageToChannel }) => {
   const { channel__id, channel__name } = useParams();
   const memberCount = JSON.parse(localStorage.getItem("memberCount"));
   const [channelMessage, setChannelMessage] = useState([]);
@@ -46,7 +46,7 @@ const ChannelMessages = () => {
       const datas = await retrieveChannelMessages();
       setChannelMessage(datas);
     })();
-  }, [channel__id]);
+  }, [channel__id, messageToChannel]);
 
   return (
     <div className="channel-messages-container">

@@ -7,7 +7,7 @@ import {
   RiSendPlaneFill,
 } from "react-icons/ri";
 
-const Messaging = ({ userId }) => {
+const Messaging = ({ userId, setMessage }) => {
   const [messageData, setMessageData] = useState({
     receiver_id: "",
     receiver_class: "User",
@@ -26,7 +26,7 @@ const Messaging = ({ userId }) => {
       },
     })
       .then((res) => res.json())
-      .then((result) => result);
+      .then((result) => setMessage(result.data));
   };
   const handleChange = (e) => {
     e.preventDefault();

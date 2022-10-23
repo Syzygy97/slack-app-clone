@@ -10,13 +10,15 @@ import "./home.css";
 
 const Home = ({ allUsers, channel_id }) => {
   const [userId, setUserId] = useState("");
+  const [message, setMessage] = useState([]);
+  const [messageToChannel, setMessageToChannel] = useState([]);
   return (
     <div className="home-container">
       <Routes>
         <Route index element={<Welcome />} />
         <Route
           path="/channelMessage/:channel__id/:channel__name"
-          element={<ChannelMessages />}
+          element={<ChannelMessages messageToChannel={messageToChannel} />}
         />
         <Route
           path="/directMessage"
@@ -24,17 +26,24 @@ const Home = ({ allUsers, channel_id }) => {
         />
         <Route
           path="directMessage/:receiver__id/:receiver__email"
-          element={<Messages allUsers={allUsers} userId={userId} />}
+          element={
+            <Messages allUsers={allUsers} userId={userId} message={message} />
+          }
         />
       </Routes>
       <Routes>
         <Route
           path="/directMessage/*"
-          element={<Messaging userId={userId} />}
+          element={<Messaging userId={userId} setMessage={setMessage} />}
         />
         <Route
           path="/channelMessage/*"
-          element={<ChannelMessaging channel_id={channel_id} />}
+          element={
+            <ChannelMessaging
+              channel_id={channel_id}
+              setMessageToChannel={setMessageToChannel}
+            />
+          }
         />
       </Routes>
     </div>

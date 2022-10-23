@@ -82,19 +82,17 @@ const Users = ({
           <ul>
             {filteredData.map((member) => {
               return (
-                <>
-                  <li
-                    key={member.id}
-                    onClick={(e) => {
-                      handleSelectUser(e);
-                    }}
-                  >
-                    <div className="user-info">
-                      <h4>{member.email}</h4>
-                      <h6>ID #{member.id}</h6>
-                    </div>
-                  </li>
-                </>
+                <li
+                  key={member.id}
+                  onClick={(e) => {
+                    handleSelectUser(e);
+                  }}
+                >
+                  <div className="user-info">
+                    <h4>{member.email}</h4>
+                    <h6>ID #{member.id}</h6>
+                  </div>
+                </li>
               );
             })}
           </ul>

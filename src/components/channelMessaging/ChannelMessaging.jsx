@@ -7,7 +7,7 @@ import {
   RiSendPlaneFill,
 } from "react-icons/ri";
 
-const ChannelMessaging = ({ channel_id }) => {
+const ChannelMessaging = ({ channel_id, setMessageToChannel }) => {
   const [channelMessageData, setChannelMessageData] = useState({
     receiver_id: "",
     receiver_class: "Channel",
@@ -26,7 +26,7 @@ const ChannelMessaging = ({ channel_id }) => {
       },
     })
       .then((res) => res.json())
-      .then((result) => result);
+      .then((result) => setMessageToChannel(result.data));
   };
   const handleChange = (e) => {
     e.preventDefault();
