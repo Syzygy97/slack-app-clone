@@ -18,6 +18,7 @@
 }
 .logo-and-list-container > img {
   height: 6vh;
+  scale: 1.5;
 }
 .logo-and-list-container > ul {
   display: flex;

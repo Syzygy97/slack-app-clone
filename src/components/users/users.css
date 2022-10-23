@@ -28,11 +28,22 @@
   list-style: none;
   cursor: pointer;
 }
+.users-container li > span {
+  height: auto;
+}
 .channel-users-list {
   height: calc(93vh - 7vh - 7vh);
   padding: 0.5rem 0.75rem;
   overflow: hidden;
   overflow-y: auto;
+}
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.user-info > h6 {
+  opacity: 0.7;
 }
 .signed-in-user-email {
   height: 7vh;

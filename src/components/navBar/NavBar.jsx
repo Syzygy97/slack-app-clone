@@ -1,7 +1,7 @@
 import React from "react";
 import "./navBar.css";
 import Buttons from "../buttons";
-import logo from "../../assets/yourLogoHere.png";
+import SlackLogo from "../../assets/Slack_RGB.svg";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
     <nav className="nav-bar-container">
       <div className="logo-and-list-container">
-        <img src={logo} alt="app-logo" />
+        <img src={SlackLogo} alt="app-logo" />
         <ul>
           <li>Why Slack?</li>
           <li>Solutions</li>

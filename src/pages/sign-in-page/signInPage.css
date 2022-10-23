@@ -8,7 +8,6 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-
 .sign-in-container,
 .form-container,
 .sign-in-inputs-container {
@@ -28,35 +27,45 @@
 .sign-in-container > h1,
 .sign-in-inputs-container > label,
 .sign-in-inputs {
-  color: white;
+  color: rgba(53, 0, 53);
 }
 .sign-in-button,
 .sign-in-inputs-container > label {
   margin-top: 1.5rem;
 }
-
 .sign-in-container {
   height: 600px;
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  background-color: rgba(53, 0, 53);
+  background-color: white;
 }
 .sign-in-container > img {
   height: 8rem;
-  padding-bottom: 2rem;
+  scale: 1.5;
+  padding: 0.5rem 0;
+  margin-top: -1rem;
+}
+.sign-in-container > h1 {
+  z-index: 1;
+}
+.sign-in-container > h4 {
+  color: rgba(53, 0, 53);
+  margin-top: 1rem;
 }
 .form-container {
   padding: 0.5rem 0.75rem;
 }
 .sign-in-inputs-container > label {
   margin-bottom: 0.75rem;
+  font-size: 1.25rem;
 }
 .sign-in-inputs {
   width: 50ch;
   height: 2rem;
   padding: 0.25rem 0.75rem;
   font-size: 1rem;
-  color: black;
+  color: white;
+  background-color: rgba(53, 0, 53);
 }
 .sign-in-button {
   width: 15ch;

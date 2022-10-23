@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./signInPage.css";
-import logo from "../../assets/yourLogoHere.png";
+import SlackGIF from "../../assets/slack_animated.gif";
 import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
 import { useNavigate, Link } from "react-router-dom";
@@ -56,10 +56,6 @@ const SignInPage = () => {
       },
     })
       .then((res) => {
-        // console.log("response", res.headers.get("access-token"));
-        // console.log("response", res.headers.get("client"));
-        // console.log("response", res.headers.get("expiry"));
-        // console.log("response", res.headers.get("uid"));
         res.headers.forEach((val, key) => {
           console.log(key + "->" + val);
           if (
@@ -116,8 +112,8 @@ const SignInPage = () => {
   return (
     <div className="sign-in-page">
       <div className="sign-in-container">
-        <img src={logo} alt="logo" />
-        <h1>Sign in to Slacord</h1>
+        <img src={SlackGIF} alt="logo" />
+        <h1>Sign in to Slack</h1>
         <form onSubmit={handleSignInSubmit} className="form-container">
           {dataInputs.map((input) => (
             <div className="sign-in-inputs-container" key={input.id}>
@@ -134,10 +130,7 @@ const SignInPage = () => {
           <Buttons name="Confirm" className="sign-in-button" />
         </form>
         <h4>
-          Don't have an account yet?{" "}
-          <Link to="/register" style={{ color: "rgb(250,0,250)" }}>
-            Register
-          </Link>
+          Don't have an account yet? <Link to="/register">Register</Link>
         </h4>
         <h2 className={isError ? "invalid" : "valid"}>
           ACCOUNT DOES NOT EXIST

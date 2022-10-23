@@ -13,6 +13,7 @@ const Users = ({
   const signedInData = JSON.parse(localStorage.getItem("signedInData"));
   const { email } = signedInData;
   const [channelMembers, setChannelMembers] = useState([]);
+  const [channelMemberEmail, setChannelMemberEmail] = useState([]);
   let dynamicUrl = "http://206.189.91.54/api/v1/channels/" + activeChannelId;
 
   useEffect(() => {
@@ -58,18 +59,18 @@ const Users = ({
     e.preventDefault();
     setNewMemberModal(!newMemberModal);
   };
-  // const userIds = channelMembers.map((data) => data.user_id);
-  // const filteredData = allUsers.filter((user) => {
-  //   // option 1
-  //   return userIds.includes(user.id);
-  //   // option 2
-  //   return userIds.filter((id) => id === user.id).length;
-  //   // option 3
-  //   return userIds.findIndex((id) => id === user.id) > -1;
-  //   // hard-coded way
-  //   // return user.id === 2816 || user.id === 2 || user.id === 2818;
-  // });
-  // console.log("filtered", filteredData);
+  const filteredData = allUsers.filter((user) => {
+    const userIds = channelMembers.map((data) => data.user_id);
+    // option 1
+    return userIds.includes(user.id);
+    //   // option 2
+    //   return userIds.filter((id) => id === user.id).length;
+    //   // option 3
+    //   return userIds.findIndex((id) => id === user.id) > -1;
+    //   // hard-coded way
+    //   // return user.id === 2816 || user.id === 2 || user.id === 2818;
+  });
+  console.log("filtered", filteredData);
   return (
     <>
       <div className="users-container">
@@ -79,16 +80,21 @@ const Users = ({
         </div>
         <div className="channel-users-list">
           <ul>
-            {channelMembers.map((member) => {
+            {filteredData.map((member) => {
               return (
-                <li
-                  key={member.id}
-                  onClick={(e) => {
-                    handleSelectUser(e);
-                  }}
-                >
-                  {member.user_id}
-                </li>
+                <>
+                  <li
+                    key={member.id}
+                    onClick={(e) => {
+                      handleSelectUser(e);
+                    }}
+                  >
+                    <div className="user-info">
+                      <h4>{member.email}</h4>
+                      <h6>ID #{member.id}</h6>
+                    </div>
+                  </li>
+                </>
               );
             })}
           </ul>

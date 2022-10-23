@@ -28,7 +28,7 @@
 .sign-up-container > h1,
 .sign-up-inputs-container > label,
 .sign-up-inputs {
-  color: white;
+  color: rgba(53, 0, 53);
 }
 .sign-up-button,
 .sign-up-inputs-container > label {
@@ -45,25 +45,31 @@
   height: 600px;
   border-radius: 10px;
   padding: 0.5rem 1rem;
-  background-color: rgba(53, 0, 53);
+  background-color: white;
   margin-bottom: 2rem;
 }
 .sign-up-container > img {
-  height: 6rem;
+  height: 8rem;
+  scale: 1.5;
   padding: 0.5rem 0;
+}
+.sign-up-container > h1 {
+  z-index: 1;
 }
 .form-container {
   padding: 0.5rem 0.75rem;
 }
 .sign-up-inputs-container > label {
   margin-bottom: 0.75rem;
+  font-size: 1.25rem;
 }
 .sign-up-inputs {
   width: 50ch;
   height: 2rem;
   padding: 0.25rem 0.75rem;
   font-size: 1rem;
-  color: black;
+  color: white;
+  background-color: rgba(53, 0, 53);
 }
 span {
   width: 50ch;

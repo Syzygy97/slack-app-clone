@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./signUpPage.css";
-import logo from "../../assets/yourLogoHere.png";
+import SlackGIF from "../../assets/slack_animated.gif";
 import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
 import { useNavigate } from "react-router-dom";
@@ -57,9 +57,6 @@ const SignUpPage = () => {
     const SERVER_DATA = JSON.parse(localStorage.getItem("usersList"));
     if (SERVER_DATA) setUsersList(SERVER_DATA);
   }, []);
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
 
   const fetchUsers = () => {
     fetch("http://206.189.91.54/api/v1/auth/", {
@@ -94,12 +91,6 @@ const SignUpPage = () => {
       setIsError(true);
       return;
     } else {
-      // setUserData({
-      //   ...userData,
-      //   email: "",
-      //   password: "",
-      //   password_confirmation: "",
-      // });
       setUsersList((prevData) => {
         return [...prevData, newUserData];
       });
@@ -115,7 +106,7 @@ const SignUpPage = () => {
     <div className="sign-up-page">
       <NavBar />
       <div className="sign-up-container">
-        <img src={logo} alt="logo" />
+        <img src={SlackGIF} alt="logo" />
         <h1>Create an account</h1>
         <form onSubmit={handleSignUpSubmit} className="form-container">
           {dataInputs.map((input) => (
