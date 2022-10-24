@@ -1,10 +1,11 @@
 .sign-up-page {
   width: 100vw;
   height: 100vh;
-  display: flex;
+  position: relative;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   background-image: url("../../assets/hands.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -35,9 +36,11 @@
   margin-top: 1.5rem;
 }
 .sign-up-page > nav {
+  position: fixed;
   border-radius: 30px;
   border: 2px solid rgba(53, 0, 53);
   width: 85%;
+  margin-left: 8rem;
   margin-top: 1rem;
   background-color: rgba(255, 255, 255, 0.5);
 }
@@ -47,6 +50,10 @@
   padding: 0.5rem 1rem;
   background-color: white;
   margin-bottom: 2rem;
+  position: relative;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .sign-up-container > img {
   height: 8rem;
