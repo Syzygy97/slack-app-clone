@@ -30,6 +30,7 @@
 .users-container li {
   list-style: none;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 }
 .users-container li > span {
   height: auto;

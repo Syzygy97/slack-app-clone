@@ -97,7 +97,7 @@ const Users = ({
         </div>
       </div>
       <div className="signed-in-user-email">
-        <h2>{email}</h2>
+        <h2>Hello, {email}!</h2>
       </div>
     </>
   );

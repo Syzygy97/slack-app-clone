@@ -80,7 +80,7 @@ const Channel = ({
                   }}
                 >
                   <h4>{channel.name}</h4>
-                  <h6>{channel.id}</h6>
+                  <h6>#{channel.id}</h6>
                 </li>
               </Link>
             );
