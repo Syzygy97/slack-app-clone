@@ -49,6 +49,9 @@
   align-items: center;
   gap: 0.5rem;
 }
+.channel-message-body > h4 {
+  word-break: break-all;
+}
 .channel-message-body > h6 {
   padding-top: 0.25rem;
   opacity: 0;
