@@ -17,7 +17,6 @@ const Channel = ({
   const [channelList, setChannelList] = useState([]);
   const handleAddChannel = (e) => {
     e.preventDefault();
-    console.log("test");
     setModal(!modal);
   };
   const fetchChannels = async () => {

@@ -57,8 +57,10 @@
   margin-top: 0.5rem;
   background-color: rgb(55, 0, 55);
 }
-span {
+.add-member-input ~ span {
   width: 100%;
+  color: red;
+  display: none;
 }
 .add-member-input::placeholder {
   font-size: 0.8rem;

@@ -21,14 +21,12 @@ const Home = ({ allUsers, channel_id }) => {
           element={<ChannelMessages messageToChannel={messageToChannel} />}
         />
         <Route
-          path="/directMessage"
+          path="/newMessage"
           element={<NewMessage allUsers={allUsers} setUserId={setUserId} />}
         />
         <Route
           path="directMessage/:receiver__id/:receiver__email"
-          element={
-            <Messages allUsers={allUsers} userId={userId} message={message} />
-          }
+          element={<Messages userId={userId} message={message} />}
         />
       </Routes>
       <Routes>

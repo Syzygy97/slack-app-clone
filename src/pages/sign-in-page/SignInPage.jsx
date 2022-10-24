@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./signInPage.css";
 import SlackGIF from "../../assets/slack_animated.gif";
 import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
 import { useNavigate, Link } from "react-router-dom";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const SIGNED_IN_STORAGE_KEY = "signedInData";
 
@@ -14,8 +15,8 @@ const SignInPage = () => {
   };
   const [isError, setIsError] = useState(false);
   const [withAccount, setWithAccount] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [userInput, setUserInput] = useState([]);
-  const [usersList, setUsersList] = useState([]);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -33,7 +34,7 @@ const SignInPage = () => {
     {
       id: 2,
       name: "password",
-      type: "password",
+      type: visible ? "text" : "password",
       placeholder: "enter password",
       label: "PASSWORD",
       errorMessage: "Incorrect Password",
@@ -41,13 +42,7 @@ const SignInPage = () => {
       required: true,
     },
   ];
-
-  useEffect(() => {
-    const SERVER_DATA = JSON.parse(localStorage.getItem("usersList"));
-    if (SERVER_DATA) setUsersList(SERVER_DATA);
-  }, []);
-
-  const fetchUsers = async () => {
+  const LoginUser = async () => {
     await fetch("http://206.189.91.54/api/v1/auth/sign_in", {
       method: "POST",
       body: JSON.stringify(userData),
@@ -56,22 +51,38 @@ const SignInPage = () => {
       },
     })
       .then((res) => {
-        res.headers.forEach((val, key) => {
-          console.log(key + "->" + val);
-          if (
-            key === "access-token" ||
-            key === "client" ||
-            key === "expiry" ||
-            key === "uid"
-          ) {
-            saveCredentials(key, val);
-          }
-        });
-        // alert("Form Submitted");
+        if (!res.ok) {
+          setIsError(true);
+          setWithAccount(false);
+          throw Error("Invalid Credentials");
+        } else {
+          res.headers.forEach((val, key) => {
+            if (
+              key === "access-token" ||
+              key === "client" ||
+              key === "expiry" ||
+              key === "uid"
+            ) {
+              saveCredentials(key, val);
+            }
+          });
+          setUserInput(...userInput, {
+            email: userData.email,
+            password: userData.password,
+          });
+          localStorage.setItem(
+            SIGNED_IN_STORAGE_KEY,
+            JSON.stringify(...userInput, {
+              email: userData.email,
+              password: userData.password,
+            })
+          );
+          navigate("/main");
+        }
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        return result;
       });
   };
   const handleChange = (e) => {
@@ -83,31 +94,13 @@ const SignInPage = () => {
     setIsError(false);
     setWithAccount(true);
   };
-  const validateUser = async () => {
-    const userCheck = usersList.find(
-      (user) =>
-        user.email === userData.email && user.password === userData.password
-    );
-    if (userCheck) {
-      setUserInput(userCheck);
-      localStorage.setItem(
-        SIGNED_IN_STORAGE_KEY,
-        JSON.stringify(...userInput, {
-          email: userCheck.email,
-          password: userCheck.password,
-        })
-      );
-      await fetchUsers();
-      navigate("/main");
-    } else {
-      setIsError(true);
-      setWithAccount(false);
-      return;
-    }
-  };
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
-    await validateUser(usersList);
+    await LoginUser();
+  };
+  const togglePassword = (e) => {
+    e.preventDefault();
+    setVisible(!visible);
   };
   return (
     <div className="sign-in-page">
@@ -124,6 +117,14 @@ const SignInPage = () => {
                 value={userData[input.name]}
                 onChange={handleChange}
                 onClick={handleInputClick}
+              />
+              <BsFillEyeSlashFill
+                className={visible ? "invisible" : "visible"}
+                onClick={togglePassword}
+              />
+              <BsFillEyeFill
+                className={visible ? "visible" : "invisible"}
+                onClick={togglePassword}
               />
             </div>
           ))}

@@ -41,7 +41,7 @@ const Messaging = ({ userId, setMessage }) => {
   useEffect(() => {
     setMessageData({ ...messageData, receiver_id: userId });
   }, [messageData.body]);
-  // console.log("msg data", messageData);
+
   return (
     <div className="messaging-container">
       <header>

@@ -11,6 +11,9 @@
   align-items: center;
   padding: 0 0.5rem;
 }
+.channel-name > div > h6 {
+  opacity: 0.8;
+}
 .channel-messages {
   padding: 0.25rem 0.5rem;
   overflow-x: hidden;

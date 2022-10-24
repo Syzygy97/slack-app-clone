@@ -57,8 +57,10 @@
   margin-top: 0.5rem;
   background-color: rgb(55, 0, 55);
 }
-span {
+.add-channel-input ~ span {
   width: 100%;
+  color: red;
+  display: none;
 }
 .add-channel-input::placeholder {
   font-size: 0.8rem;

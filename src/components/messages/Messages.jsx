@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import "./messages.css";
 import Avatar from "../../assets/avatar4.png";
 
-const Messages = ({ allUsers, userId, message }) => {
+const Messages = ({ userId, message }) => {
   const { receiver__id, receiver__email } = useParams();
-  const receiver = allUsers.find((user) => user.id === receiver__id);
   const [directMessage, setDirectMessage] = useState([]);
   const [data, setData] = useState({
     receiver_id: parseInt(receiver__id),

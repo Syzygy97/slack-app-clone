@@ -5,6 +5,7 @@ import Buttons from "../../components/buttons";
 import Inputs from "../../components/inputs";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/navBar";
+import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 const USER_LIST_STORAGE_KEY = "usersList";
 
@@ -12,9 +13,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
   const [usersList, setUsersList] = useState([]);
-  const usersListEmail = usersList.map((user) => {
-    return user.email;
-  });
+  const [visible, setVisible] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -33,7 +32,7 @@ const SignUpPage = () => {
     {
       id: 2,
       name: "password",
-      type: "password",
+      type: visible ? "text" : "password",
       placeholder: "enter password",
       label: "PASSWORD",
       errorMessage:
@@ -45,7 +44,7 @@ const SignUpPage = () => {
     {
       id: 3,
       name: "password_confirmation",
-      type: "password",
+      type: visible ? "text" : "password",
       placeholder: "re-type password",
       label: "RE-TYPE PASSWORD",
       errorMessage: "Password does not match!",
@@ -58,18 +57,39 @@ const SignUpPage = () => {
     if (SERVER_DATA) setUsersList(SERVER_DATA);
   }, []);
 
-  const fetchUsers = () => {
-    fetch("http://206.189.91.54/api/v1/auth/", {
+  const RegisterUser = async () => {
+    await fetch("http://206.189.91.54/api/v1/auth/", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      console.log(res);
-      alert("Form Submitted");
-      return res.json();
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          setIsError(true);
+          throw Error("USERNAME ALREADY TAKEN");
+        } else {
+          const newUserData = {
+            email: userData.email,
+            password: userData.password,
+            password_confirmation: userData.password_confirmation,
+          };
+          setUsersList((prevData) => {
+            return [...prevData, newUserData];
+          });
+          localStorage.setItem(
+            USER_LIST_STORAGE_KEY,
+            JSON.stringify([...usersList, newUserData])
+          );
+          navigate("/login");
+        }
+        return res.json();
+      })
+      .then((result) => result)
+      .catch((err) => {
+        return err;
+      });
   };
 
   const handleChange = (e) => {
@@ -80,27 +100,13 @@ const SignUpPage = () => {
     e.preventDefault();
     setIsError(false);
   };
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-    const newUserData = {
-      email: userData.email,
-      password: userData.password,
-      password_confirmation: userData.password_confirmation,
-    };
-    if (usersListEmail.some((item) => item === userData.email)) {
-      setIsError(true);
-      return;
-    } else {
-      setUsersList((prevData) => {
-        return [...prevData, newUserData];
-      });
-      localStorage.setItem(
-        USER_LIST_STORAGE_KEY,
-        JSON.stringify([...usersList, newUserData])
-      );
-      fetchUsers();
-      navigate("/login");
-    }
+    await RegisterUser();
+  };
+  const togglePassword = (e) => {
+    e.preventDefault();
+    setVisible(!visible);
   };
   return (
     <div className="sign-up-page">
@@ -119,33 +125,16 @@ const SignUpPage = () => {
                 onChange={handleChange}
                 onClick={handleEmailClick}
               />
+              <BsFillEyeSlashFill
+                className={visible ? "invisible" : "visible"}
+                onClick={togglePassword}
+              />
+              <BsFillEyeFill
+                className={visible ? "visible" : "invisible"}
+                onClick={togglePassword}
+              />
             </div>
           ))}
-          {/* <label>EMAIL</label>
-          <Inputs
-            className="sign-up-inputs"
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </div>
-        <div className="sign-up-inputs-container">
-          <label>PASSWORD</label>
-          <Inputs
-            className="sign-up-inputs"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <div className="sign-up-inputs-container">
-          <label>CONFIRM PASSWORD</label>
-          <Inputs
-            className="sign-up-inputs"
-            type="password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-          /> */}
           <Buttons name="Confirm" className="sign-up-button" />
         </form>
         <h2 className={isError ? "invalid" : "valid"}>

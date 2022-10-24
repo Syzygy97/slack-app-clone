@@ -9,4 +9,11 @@
 .search-input {
   width: 30ch;
   height: 2rem;
+  background-color: rgb(255, 255, 255, 0.3);
+  border-radius: 5px;
+  color: white;
+  padding: 0.25rem 0.75rem;
+}
+.search-input::placeholder {
+  color: rgb(255, 255, 255, 0.5);
 }

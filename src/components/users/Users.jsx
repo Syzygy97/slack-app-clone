@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./users.css";
 
 const MEMBER_COUNT_KEY = "memberCount";
@@ -10,17 +11,12 @@ const Users = ({
   setNewMemberModal,
   addNewMember,
 }) => {
+  const navigate = useNavigate();
   const signedInData = JSON.parse(localStorage.getItem("signedInData"));
   const { email } = signedInData;
   const [channelMembers, setChannelMembers] = useState([]);
-  const [channelMemberEmail, setChannelMemberEmail] = useState([]);
+  const [channelId, setChannelId] = useState("");
   let dynamicUrl = "http://206.189.91.54/api/v1/channels/" + activeChannelId;
-
-  useEffect(() => {
-    (async () => {
-      await fetchChannelMemberIds();
-    })();
-  }, [dynamicUrl, addNewMember]);
   const fetchChannelMemberIds = async () => {
     await fetch(dynamicUrl, {
       method: "GET",
@@ -39,10 +35,28 @@ const Users = ({
         if (data === undefined) {
           setChannelMembers([]);
         } else {
+          setChannelId(data.id);
           setChannelMembers(channel_members);
         }
       });
   };
+  const handleSelectUser = (e, id, email) => {
+    e.preventDefault();
+    navigate(`directMessage/${id}/${email}`);
+  };
+  const handleAddMember = (e) => {
+    e.preventDefault();
+    setNewMemberModal(!newMemberModal);
+  };
+  const filteredData = allUsers.filter((user) => {
+    const userIds = channelMembers.map((data) => data.user_id);
+    return userIds.includes(user.id);
+  });
+  useEffect(() => {
+    (async () => {
+      await fetchChannelMemberIds();
+    })();
+  }, [dynamicUrl, addNewMember]);
   useEffect(() => {
     localStorage.setItem(
       MEMBER_COUNT_KEY,
@@ -52,30 +66,14 @@ const Users = ({
   useEffect(() => {
     localStorage.setItem("channelMembers", JSON.stringify(channelMembers));
   }, [channelMembers]);
-  const handleSelectUser = (e) => {
-    e.preventDefault();
-  };
-  const handleAddMember = (e) => {
-    e.preventDefault();
-    setNewMemberModal(!newMemberModal);
-  };
-  const filteredData = allUsers.filter((user) => {
-    const userIds = channelMembers.map((data) => data.user_id);
-    // option 1
-    return userIds.includes(user.id);
-    //   // option 2
-    //   return userIds.filter((id) => id === user.id).length;
-    //   // option 3
-    //   return userIds.findIndex((id) => id === user.id) > -1;
-    //   // hard-coded way
-    //   // return user.id === 2816 || user.id === 2 || user.id === 2818;
-  });
-  console.log("filtered", filteredData);
   return (
     <>
       <div className="users-container">
         <div className="users-header">
-          <h3>MEMBERS</h3>
+          <div>
+            <h3>MEMBERS</h3>
+            <h5>#{channelId}</h5>
+          </div>
           <i onClick={handleAddMember}>+</i>
         </div>
         <div className="channel-users-list">
@@ -85,7 +83,7 @@ const Users = ({
                 <li
                   key={member.id}
                   onClick={(e) => {
-                    handleSelectUser(e);
+                    handleSelectUser(e, member.id, member.email);
                   }}
                 >
                   <div className="user-info">

@@ -2,26 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./channelMessages.css";
 import Avatar from "../../assets/avatar4.png";
+import { RiH6 } from "react-icons/ri";
 
 const ChannelMessages = ({ messageToChannel }) => {
   const { channel__id, channel__name } = useParams();
   const memberCount = JSON.parse(localStorage.getItem("memberCount"));
   const [channelMessage, setChannelMessage] = useState([]);
-  // const [data, setData] = useState({
-  //   receiver_id: parseInt(channel__id),
-  //   receiver_class: "Channel",
-  // });
   const retrieveChannelMessages = async (receiverId, receiverClass) => {
-    // const data = {
-    //   receiver_id: receiverId,
-    //   receiver_class: receiverClass
-    // }
-
-    // let dynamicUrl = new URL("http://206.189.91.54/api/v1/messages");
-
-    // for (let key in data) {
-    //   dynamicUrl.searchParams.append(key, data[key]);
-    // }
     return fetch(
       `http://206.189.91.54/api/v1/messages?receiver_id=${channel__id}&receiver_class=Channel`,
       {
@@ -51,7 +38,10 @@ const ChannelMessages = ({ messageToChannel }) => {
   return (
     <div className="channel-messages-container">
       <div className="channel-name">
-        <h3>{channel__name}</h3>
+        <div>
+          <h3>{channel__name}</h3>
+          <h6>CH ID #{channel__id}</h6>
+        </div>
         <h4>{memberCount} users</h4>
       </div>
       <div className="channel-messages">

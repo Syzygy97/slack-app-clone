@@ -50,7 +50,7 @@
 }
 .sign-up-container > img {
   height: 8rem;
-  scale: 1.5;
+  scale: 1.3;
   padding: 0.5rem 0;
 }
 .sign-up-container > h1 {
@@ -71,7 +71,7 @@
   color: white;
   background-color: rgba(53, 0, 53);
 }
-span {
+.sign-up-inputs ~ span {
   width: 50ch;
   color: red;
   display: none;
@@ -97,5 +97,25 @@ span {
   display: block;
 }
 .valid {
+  display: none;
+}
+.sign-up-inputs-container {
+  position: relative;
+}
+.visible {
+  position: absolute;
+  bottom: -5.35rem;
+  right: 1rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+}
+.invisible {
+  position: absolute;
+  bottom: -5.35rem;
+  right: 1rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
   display: none;
 }

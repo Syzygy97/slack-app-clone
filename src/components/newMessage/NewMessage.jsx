@@ -5,7 +5,7 @@ import "./newMessage.css";
 const NewMessage = ({ allUsers, setUserId }) => {
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
-  const [recipient, setRecipient] = useState("");
+  const [query, setQuery] = useState("");
   const handleFocus = (e) => {
     e.preventDefault();
     setIsActive(false);
@@ -16,28 +16,14 @@ const NewMessage = ({ allUsers, setUserId }) => {
   };
   const handleSelectRecipient = (e, email, id) => {
     e.preventDefault();
-    setRecipient(email);
+    setQuery(email);
     setUserId(id);
     setIsActive(true);
-    navigate(`${id}/${email}`);
-  };
-  const handleChange = (e) => {
-    e.preventDefault();
-    setRecipient(e.target.value);
+    navigate(`/main/directMessage/${id}/${email}`);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  // const handleSearchChange = (e) => {
-  //   if (!e.target.value) return setSearchResults(userLists);
-  //   const resultsArray = userLists.filter((users) =>
-  //     users.email.startsWith(e.target.value)
-  //   );
-  //   setSearchResults(resultsArray);
-  // };
-  // useEffect(()=> {
-  //   setUserLists(allUsers)
-  // },[])
   return (
     <div className="new-message-container">
       <div className="new-message-label">
@@ -47,10 +33,13 @@ const NewMessage = ({ allUsers, setUserId }) => {
         <h4>To:</h4>
         <input
           className="new-message-receiver-email"
-          placeholder="enter receiver"
-          value={recipient}
+          placeholder="search user"
+          value={query}
           onFocus={handleFocus}
-          onChange={handleChange}
+          onChange={(e) => {
+            e.preventDefault();
+            setQuery(e.target.value);
+          }}
         />
         <div
           className={
@@ -58,24 +47,26 @@ const NewMessage = ({ allUsers, setUserId }) => {
           }
         >
           <ul>
-            {allUsers.map((user) => {
-              return (
-                <Link
-                  to={`/directMessage/${user.id}/${user.email}`}
-                  style={{ textDecoration: "none" }}
-                  key={user.id}
-                >
-                  <li
+            {allUsers
+              .filter((user) => user.email.toLowerCase().startsWith(query))
+              .map((user) => {
+                return (
+                  <Link
+                    to={`/directMessage/${user.id}/${user.email}`}
+                    style={{ textDecoration: "none" }}
                     key={user.id}
-                    onClick={(e) => {
-                      handleSelectRecipient(e, user.email, user.id);
-                    }}
                   >
-                    {user.email}
-                  </li>
-                </Link>
-              );
-            })}
+                    <li
+                      key={user.id}
+                      onClick={(e) => {
+                        handleSelectRecipient(e, user.email, user.id);
+                      }}
+                    >
+                      {user.email}
+                    </li>
+                  </Link>
+                );
+              })}
           </ul>
         </div>
       </form>

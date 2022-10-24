@@ -17,9 +17,9 @@ const SideBar = ({
     navigate("/login");
     localStorage.setItem("signedInData", []);
   };
-  const navigateToDirectMessage = (e) => {
+  const navigateToNewMessage = (e) => {
     e.preventDefault();
-    navigate("/main/directMessage");
+    navigate("/main/newMessage");
   };
   const navigateToWelcome = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const SideBar = ({
         <h2 onClick={navigateToWelcome}>AVION SCHOOL</h2>
         <BsPencilSquare
           className="new-message-button"
-          onClick={navigateToDirectMessage}
+          onClick={navigateToNewMessage}
         />
       </div>
       <Channel

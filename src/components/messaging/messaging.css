@@ -56,7 +56,6 @@ footer > .send-message-button {
   width: 3rem;
   font-size: 1.75rem;
   border-radius: 8px;
-  /* background-color: rgb(88, 129, 88); */
   background-color: rgba(53, 0, 53);
   padding: 0.1rem 0;
 }

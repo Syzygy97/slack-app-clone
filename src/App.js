@@ -6,7 +6,6 @@ import LandingPage from "./pages/landing-page";
 import SignUpPage from "./pages/sign-up-page";
 import MainPage from "./pages/main-page";
 import SignInPage from "./pages/sign-in-page";
-import Modals from "./components/modals";
 
 function App() {
   return (
