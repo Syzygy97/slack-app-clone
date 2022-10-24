@@ -108,11 +108,14 @@ const SignUpPage = () => {
     e.preventDefault();
     setVisible(!visible);
   };
+  const navigateToLandingPage = (e) => {
+    navigate("/");
+  };
   return (
     <div className="sign-up-page">
       <NavBar />
       <div className="sign-up-container">
-        <img src={SlackGIF} alt="logo" />
+        <img src={SlackGIF} alt="logo" onClick={navigateToLandingPage} />
         <h1>Create an account</h1>
         <form onSubmit={handleSignUpSubmit} className="form-container">
           {dataInputs.map((input) => (
