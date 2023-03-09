@@ -11,7 +11,9 @@ const Messages = ({ userId, message }) => {
     receiver_class: "User",
   });
   const retrieveDirectMessages = async () => {
-    let dynamicUrl = new URL("http://206.189.91.54/api/v1/messages");
+    let dynamicUrl = new URL(
+      "https://slackapi.avionschool.com/api/v1/messages"
+    );
     for (let key in data) {
       dynamicUrl.searchParams.append(key, data[key]);
     }

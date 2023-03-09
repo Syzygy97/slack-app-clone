@@ -10,7 +10,7 @@ const ChannelMessages = ({ messageToChannel }) => {
   const [channelMessage, setChannelMessage] = useState([]);
   const retrieveChannelMessages = async (receiverId, receiverClass) => {
     return fetch(
-      `http://206.189.91.54/api/v1/messages?receiver_id=${channel__id}&receiver_class=Channel`,
+      `https://slackapi.avionschool.com/api/v1/messages?receiver_id=${channel__id}&receiver_class=Channel`,
       {
         method: "GET",
         headers: {

@@ -45,7 +45,7 @@ const Modals = ({ modal, setModal, setNewChannel }) => {
     }
   };
   const CreateChannel = async () => {
-    await fetch("http://206.189.91.54/api/v1/channels", {
+    await fetch("https://slackapi.avionschool.com/api/v1/channels", {
       method: "POST",
       body: JSON.stringify(channelData),
       headers: {

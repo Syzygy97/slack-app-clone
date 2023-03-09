@@ -14,7 +14,7 @@ const ChannelMessaging = ({ channel_id, setMessageToChannel }) => {
     body: "",
   });
   const sendMessages = async () => {
-    await fetch("http://206.189.91.54/api/v1/messages", {
+    await fetch("https://slackapi.avionschool.com/api/v1/messages", {
       method: "POST",
       body: JSON.stringify(channelMessageData),
       headers: {

@@ -16,7 +16,8 @@ const Users = ({
   const { email } = signedInData;
   const [channelMembers, setChannelMembers] = useState([]);
   const [channelId, setChannelId] = useState("");
-  let dynamicUrl = "http://206.189.91.54/api/v1/channels/" + activeChannelId;
+  let dynamicUrl =
+    "https://slackapi.avionschool.com/api/v1/channels/" + activeChannelId;
   const fetchChannelMemberIds = async () => {
     await fetch(dynamicUrl, {
       method: "GET",

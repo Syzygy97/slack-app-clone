@@ -20,7 +20,7 @@ const Channel = ({
     setModal(!modal);
   };
   const fetchChannels = async () => {
-    await fetch("http://206.189.91.54/api/v1/channels", {
+    await fetch("https://slackapi.avionschool.com/api/v1/channels", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

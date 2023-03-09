@@ -46,7 +46,7 @@ const NewMemberModal = ({
     setNewMember({ ...newMember, [e.target.name]: e.target.value });
   };
   const AddMember = async () => {
-    await fetch("http://206.189.91.54/api/v1/channel/add_member", {
+    await fetch("https://slackapi.avionschool.com/api/v1/channel/add_member", {
       method: "POST",
       body: JSON.stringify(newMember),
       headers: {

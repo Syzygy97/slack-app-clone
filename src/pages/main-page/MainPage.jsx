@@ -18,7 +18,7 @@ const MainPage = () => {
   const [addNewMember, setAddNewMember] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const fetchAllUsers = async () => {
-    await fetch("http://206.189.91.54/api/v1/users", {
+    await fetch("https://slackapi.avionschool.com/api/v1/users", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
